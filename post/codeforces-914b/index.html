@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>CodeForces 914B | ueter</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://UeterSad.github.io/favicon.ico?v=1694935477743">
+<link rel="stylesheet" href="https://UeterSad.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+题目
+CodeForces914B
+题目大意
+
+两个人玩游戏
+每次选一张牌拿走，同时拿走小于这张牌的所有牌
+拿走最后一张牌的获胜
+每个人采取最优方案，输出获胜的人
+
+解题思路及分析
+
+博弈论
+
+
+递归的去思考这个问题
+先是最简单的情况
+
+..." />
+    <meta name="keywords" content="CodeForce,博弈论,算法" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://UeterSad.github.io">
+        <img src="https://UeterSad.github.io/images/avatar.png?v=1694935477743" class="site-logo">
+        <h1 class="site-title">ueter</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://UeterSad.github.io" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://UeterSad.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">CodeForces 914B</h2>
+            <div class="post-date">2023-07-31</div>
+            
+              <div class="feature-container" style="background-image: url('https://UeterSad.github.io/post-images/codeforces-914b.JPG')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <!-- more -->
+<h3 id="题目"><strong>题目</strong></h3>
+<p><a href="https://vjudge.net/problem/CodeForces-914B">CodeForces914B</a></p>
+<h3 id="题目大意"><strong>题目大意</strong></h3>
+<blockquote>
+<p>两个人玩游戏<br>
+每次选一张牌拿走，同时拿走小于这张牌的所有牌<br>
+拿走最后一张牌的获胜<br>
+每个人采取最优方案，输出获胜的人</p>
+</blockquote>
+<h3 id="解题思路及分析"><strong>解题思路及分析</strong></h3>
+<blockquote>
+<p>博弈论</p>
+</blockquote>
+<blockquote>
+<p>递归的去思考这个问题<br>
+先是最简单的情况</p>
+<ol>
+<li><code>样例</code>最大牌有1个 ---&gt; 先手必赢 （直接拿走最大牌）</li>
+<li><code>样例</code>只有一种牌 且有偶数个 ---&gt; 后手必赢</li>
+<li>最大牌有奇数个，先手拿走一张最大牌，后手变成情况2的先手 ---&gt; 先手必赢</li>
+<li>最大牌有偶数个，拿完其他牌变成情况2，故考虑次大牌<br>
+而次大牌重复上述讨论的情况，故把小于最大牌的情况统一考虑</li>
+<li>所有牌都有偶数个，递归可得到情况2 ---&gt; 后手必赢</li>
+<li>最大牌有偶数个，其余牌只有一种有奇数个，先手拿走奇数牌的一张得到情况5 ---&gt; 先手必赢</li>
+<li>最大牌有偶数个，其余牌有多种有奇数个，先手拿走奇数牌中最大牌的一张，得到情况5---&gt; 先手必赢</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>综上考虑，存在奇数个数的牌即先手赢，都是偶数个则后手赢<br>
+只需统计每种牌的个数</p>
+</blockquote>
+<h3 id="代码"><strong>代码</strong></h3>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e5;
+int a[N];
+int main()
+{
+	int n;cin&gt;&gt;n;int max=0;int win=0;
+	while(n--)
+	{
+		int x;cin&gt;&gt;x;
+		a[x]++;
+		if(x&gt;max)max=x;
+	}
+	for(int i=0;i&lt;=max;i++)
+	{
+		if(a[i]&amp;1){cout&lt;&lt;&quot;Conan&quot;&lt;&lt;'\n';win=1;break;}
+	}
+	if(!win)cout&lt;&lt;&quot;Agasa&quot;&lt;&lt;'\n';
+	return 0;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://UeterSad.github.io/tag/vd_huHOOK/" class="tag">
+                    CodeForce
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/rq0Bbb_m3/" class="tag">
+                    博弈论
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/Gp4ds8uw9/" class="tag">
+                    算法
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://UeterSad.github.io/post/hdu-1004-let-the-balloon-rise/">
+                  <h3 class="post-title">
+                    HDU 1004 Let the Balloon Rise
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'cd9a14b5a6171df5c0bc',
+        clientSecret: 'd51a9f37c51ee12ad21fd5fac1ea7142bb45654a',
+        repo: 'UeterSad.github.io',
+        owner: 'UeterSad',
+        admin: ['UeterSad'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

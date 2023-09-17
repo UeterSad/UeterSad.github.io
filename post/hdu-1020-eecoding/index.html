@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>HDU 1020 Eecoding | ueter</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://UeterSad.github.io/favicon.ico?v=1694935477743">
+<link rel="stylesheet" href="https://UeterSad.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+HDU Encoding
+
+题目大意
+
+将输入的大写字母字符串转换格式输出，在大写字母前输出该字母的个数，如果个数为1，则可忽略
+
+代码
+#include&lt;iostream&gt;
+#include&lt;string&gt;
+us..." />
+    <meta name="keywords" content="字符串,算法,HDU" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://UeterSad.github.io">
+        <img src="https://UeterSad.github.io/images/avatar.png?v=1694935477743" class="site-logo">
+        <h1 class="site-title">ueter</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://UeterSad.github.io" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://UeterSad.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">HDU 1020 Eecoding</h2>
+            <div class="post-date">2023-07-31</div>
+            
+              <div class="feature-container" style="background-image: url('https://UeterSad.github.io/post-images/hdu-1020-eecoding.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <!-- more -->
+<h2 id="hdu-encoding">HDU Encoding</h2>
+<!-- more -->
+<h3 id="题目大意"><strong>题目大意</strong></h3>
+<blockquote>
+<p>将输入的大写字母字符串转换格式输出，在大写字母前输出该字母的个数，如果个数为1，则可忽略</p>
+</blockquote>
+<h3 id="代码"><strong>代码</strong></h3>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+char s[10005];
+int main()
+{
+	int t;
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		cin&gt;&gt;s;
+		int len=strlen(s);
+		int cnt=1;
+		for(int i=0;i&lt;len;i++)
+		{
+			if(s[i]==s[i+1])
+				cnt++;
+			else
+			{
+				if(cnt==1)
+					cout&lt;&lt;s[i];
+				else
+					cout&lt;&lt;cnt&lt;&lt;s[i];
+				cnt=1;
+			}
+		}
+		cout&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://UeterSad.github.io/tag/yO40AGd3Y/" class="tag">
+                    字符串
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/Gp4ds8uw9/" class="tag">
+                    算法
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/l9pbCwzSw/" class="tag">
+                    HDU
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://UeterSad.github.io/post/hdu-1003-max-sum/">
+                  <h3 class="post-title">
+                    HDU 1003 Max Sum
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'cd9a14b5a6171df5c0bc',
+        clientSecret: 'd51a9f37c51ee12ad21fd5fac1ea7142bb45654a',
+        repo: 'UeterSad.github.io',
+        owner: 'UeterSad',
+        admin: ['UeterSad'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>HDU 1003 Max Sum | ueter</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://UeterSad.github.io/favicon.ico?v=1694935477743">
+<link rel="stylesheet" href="https://UeterSad.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+HDU 1003 Max Sum
+HDU 1003 Max Sum
+题目大意
+
+给出一段数列，你需要计算出它的最大子串和，并输出结果和子串的起始位置及结束位置
+
+解题思路及其分析
+
+说实话，最开始我其实是没啥思路的，刚学完前缀和看到标题脑..." />
+    <meta name="keywords" content="算法,HDU,动态规划" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://UeterSad.github.io">
+        <img src="https://UeterSad.github.io/images/avatar.png?v=1694935477743" class="site-logo">
+        <h1 class="site-title">ueter</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://UeterSad.github.io" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://UeterSad.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">HDU 1003 Max Sum</h2>
+            <div class="post-date">2023-07-30</div>
+            
+              <div class="feature-container" style="background-image: url('https://UeterSad.github.io/post-images/hdu-1003-max-sum.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <!-- more -->
+<h2 id="hdu-1003-max-sum">HDU 1003 Max Sum</h2>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1003/">HDU 1003 Max Sum</a></p>
+<h3 id="题目大意">题目大意</h3>
+<blockquote>
+<p>给出一段数列，你需要计算出它的最大子串和，并输出结果和子串的起始位置及结束位置</p>
+</blockquote>
+<h3 id="解题思路及其分析">解题思路及其分析</h3>
+<blockquote>
+<p>说实话，最开始我其实是没啥思路的，刚学完前缀和看到标题脑子一热就冲上去写，写了几次都不对才发觉事情不妙，网上搜了一下，发现都说是经典动态规划问题，没怎么接触，但隐隐感觉有点眼熟，突然想起这是数据结构课上的入门问题（陈越老师用了4种解法），然后开始写，求和轻松拿下，但找出位置这个却让我犯了难，因为入门的时候她没讲原理，所以直接卡住，最后跟着别人照猫画虎写的。</p>
+</blockquote>
+<blockquote>
+<p>说一下我的大致理解：在循环的过程中，每循环一次就算出一个以当前位置结束的最大子序列和。每次循环中最大的那个保存下来，不就是最终所有最大子序列和中的最大值了么。<br>
+其中temp保存的是前一个位置的最大子序列和的开始位置（题目中是从1开始的哦）；当 now &gt; max 时就记录最大值，并保持它的开始位置为temp，终止位置即为当前位置。<br>
+当最大子序列和小于0时，将 temp = i , 其中 i  表示当前位置,now=a[i]，表示加入当前位置的值。既此最大子序列和为负值，那么下一个的最大子序列和应该是它本身，而不再累加前边的。</p>
+</blockquote>
+<h3 id="代码">代码</h3>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+using namespace std;
+const int N=1e5+9;
+int a[N];
+int main()
+{
+	int t;cin&gt;&gt;t;
+	for(int j=1;j&lt;=t;++j)
+	{
+	int n;cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;++i)cin&gt;&gt;a[i];
+	int now=0,max=-1001;
+	int l=1,r=1,temp=1;
+	for(int i=1;i&lt;=n;++i)
+	{
+		if(now&gt;=0)
+		now+=a[i];
+		else now=a[i],temp=i;
+		if(now&gt;max)r=i,l=temp,max=now;
+	}
+	cout&lt;&lt;&quot;Case &quot;&lt;&lt;j&lt;&lt;&quot;:&quot;&lt;&lt;'\n';
+	cout&lt;&lt;max&lt;&lt;&quot; &quot;&lt;&lt;l&lt;&lt;' '&lt;&lt;r&lt;&lt;'\n';
+	if (j!=t)cout&lt;&lt;'\n';  
+	}
+	return 0;
+	
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://UeterSad.github.io/tag/Gp4ds8uw9/" class="tag">
+                    算法
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/l9pbCwzSw/" class="tag">
+                    HDU
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/pUue5nfAr/" class="tag">
+                    动态规划
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://UeterSad.github.io/post/hello-gridea/">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'cd9a14b5a6171df5c0bc',
+        clientSecret: 'd51a9f37c51ee12ad21fd5fac1ea7142bb45654a',
+        repo: 'UeterSad.github.io',
+        owner: 'UeterSad',
+        admin: ['UeterSad'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

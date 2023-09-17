@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>HDU 4252 A Famous City | ueter</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://UeterSad.github.io/favicon.ico?v=1694935477743">
+<link rel="stylesheet" href="https://UeterSad.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+题目
+A Famous City
+
+题目大意
+
+一张相片上的很多建筑相互遮住了,根据高低不同就在相片上把一座高楼的可见部分作为一个矩形,
+并用数字描述其高度,若一张相片上的两个建筑群中间有空地,高度则为0;求最少有多少个建筑;
+
+思路
+
+..." />
+    <meta name="keywords" content="算法,HDU" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://UeterSad.github.io">
+        <img src="https://UeterSad.github.io/images/avatar.png?v=1694935477743" class="site-logo">
+        <h1 class="site-title">ueter</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://UeterSad.github.io" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://UeterSad.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">HDU 4252 A Famous City</h2>
+            <div class="post-date">2023-09-17</div>
+            
+              <div class="feature-container" style="background-image: url('https://UeterSad.github.io/post-images/hdu-4252-a-famous-city.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <!-- more -->
+<h3 id="题目"><strong>题目</strong></h3>
+<p><a href="https://acm.hdu.edu.cn/showproblem.php?pid=4252">A Famous City</a></p>
+<!-- more -->
+<h3 id="题目大意"><strong>题目大意</strong></h3>
+<blockquote>
+<p>一张相片上的很多建筑相互遮住了,根据高低不同就在相片上把一座高楼的可见部分作为一个矩形,<br>
+并用数字描述其高度,若一张相片上的两个建筑群中间有空地,高度则为0;求最少有多少个建筑;</p>
+</blockquote>
+<h3 id="思路"><strong>思路</strong></h3>
+<blockquote>
+<p>把每一竖行当作一座建筑然后再排除：高度为0排除，形成矩形排除。<br>
+从左往右开始数，若中间没有间隔，一旦出现高度一样的就排除掉</p>
+</blockquote>
+<h3 id="代码"><strong>代码</strong></h3>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e5+9;
+int a[N];
+void solve()
+{
+	int n;int j=0;
+	while(cin&gt;&gt;n)
+	{
+		 j++;int ans=n;
+		 for(int i=1;i&lt;=n;++i)cin&gt;&gt;a[i];
+		 for(int i=1;i&lt;=n;++i)
+		 {
+		 	if(a[i]==0)ans--;
+		 	else{
+		 		for(int k=i+1;k&lt;=n;k++)
+		 		{
+		 			if(a[i]&gt;a[k])break;
+		 			if(a[i]==a[k])
+		 			{
+		 				ans--;
+		 				break;
+		 			}
+		 		}
+		 	}
+		 }
+		 
+		cout&lt;&lt;&quot;Case &quot;&lt;&lt;j&lt;&lt;&quot;: &quot;&lt;&lt;ans&lt;&lt;'\n';
+	}
+}
+int main()
+{
+	int t=1;
+	while(t--)solve();
+	return 0;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://UeterSad.github.io/tag/Gp4ds8uw9/" class="tag">
+                    算法
+                  </a>
+                
+                  <a href="https://UeterSad.github.io/tag/l9pbCwzSw/" class="tag">
+                    HDU
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://UeterSad.github.io/post/codeforces-914b/">
+                  <h3 class="post-title">
+                    CodeForces 914B
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'cd9a14b5a6171df5c0bc',
+        clientSecret: 'd51a9f37c51ee12ad21fd5fac1ea7142bb45654a',
+        repo: 'UeterSad.github.io',
+        owner: 'UeterSad',
+        admin: ['UeterSad'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
